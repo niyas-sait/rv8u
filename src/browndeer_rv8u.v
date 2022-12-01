@@ -190,10 +190,6 @@ module browndeer_rv8u(
 
 	wire en4;
 
-	/// registers ///
-
-//	reg [BITS-1:0] r[1:NREG-1];	
-
 	//////////////////////////////////////////////
 	////////// ISA Decoder Declarations //////////
 	//////////////////////////////////////////////
@@ -254,52 +250,6 @@ module browndeer_rv8u(
    ///////////////////////////////////////////////////////////////////////////
    //////////   DES   ////////////////////////////////////////////////////////
    ///////////////////////////////////////////////////////////////////////////
-
-/*
-   always @ (posedge in_clk, posedge rst)
-   begin
-      if (rst) 
-         des_counter <= 3'b111;
-      else if (des_counter == 3'b111) 
-         des_counter <= 3'b000;
-      else 
-         des_counter <= des_counter + 1;
-   end
-
-   always @ (posedge(in_clk), posedge(rst))
-   begin
-      if (rst == 1'b1)
-         des_clk_out <= 0;
-      else if (des_counter[1:0] == 2'b11)
-         des_clk_out <= ~ des_clk_out;
-      else
-         des_clk_out <= des_clk_out;
-   end
-
-   always @ (posedge in_clk)
-   begin
-      case (des_counter)
-         3'b000: des_dout[5:0] <= des_sin;
-         3'b001: des_dout[11:6] <= des_sin;
-         3'b010: des_dout[17:12] <= des_sin;
-         3'b011: des_dout[23:18] <= des_sin;
-         3'b100: begin end
-         3'b101: begin end
-         3'b110: begin end
-         3'b111: begin end
-      endcase
-   end
-
-   always @ (*)
-   begin
-      case (des_counter[1:0])
-         2'b00: des_sout = des_din[7:0];
-         2'b01: des_sout = des_din[15:8];
-         2'b10: des_sout = des_din[23:16];
-         2'b11: des_sout = des_din[31:24];
-      endcase
-   end
-*/
 
 	des des(
    	.in_clk (in_clk),
@@ -768,79 +718,6 @@ module browndeer_rv8u(
     	     nxt_rd_din = rd_din;
     	  end
 	end
-
-/*
-	always @ (posedge clk)
-	begin
-
-		if (run & reg_we_arb & (rd_sel_arb==3'b001)) 
-    	  r[1] <= nxt_rd_din;
-		else 
-			r[1] <= r[1];
-
-		if (run & reg_we_arb & (rd_sel_arb==3'b010)) 
-    	  r[2] <= nxt_rd_din;
-		else 
-			r[2] <= r[2];
-
-		if (run & reg_we_arb & (rd_sel_arb==3'b011)) 
-    	  r[3] <= nxt_rd_din;
-		else 
-			r[3] <= r[3];
-
-		if (run & reg_we_arb & (rd_sel_arb==3'b100)) 
-    	  r[4] <= nxt_rd_din;
-		else 
-			r[4] <= r[4];
-
-		if (run & reg_we_arb & (rd_sel_arb==3'b101)) 
-    	  r[5] <= nxt_rd_din;
-		else 
-			r[5] <= r[5];
-
-		if (run & reg_we_arb & (rd_sel_arb==3'b110)) 
-    	  r[6] <= nxt_rd_din;
-		else 
-			r[6] <= r[6];
-
-		if (run & reg_we_arb & (rd_sel_arb==3'b111)) 
-    	  r[7] <= nxt_rd_din;
-		else 
-			r[7] <= r[7];
-
-	end
-
-
-	/// read register
-
-	always @ (*)
-	begin
-
-		case (rs2[1:0])
-			2'b00: rs2_dout = 'd0;
-			2'b01: rs2_dout = r[1];
-			2'b10: rs2_dout = r[2];
-			2'b11: rs2_dout = r[3];
-		endcase
-
-		case (rs1)
-			3'b000: rs1_dout = 'd0;
-			3'b001: rs1_dout = r[1];
-			3'b010: rs1_dout = r[2];
-			3'b011: rs1_dout = r[3];
-			3'b100: rs1_dout = r[4];
-			3'b101: rs1_dout = r[5];
-			3'b110: rs1_dout = r[6];
-			3'b111: rs1_dout = r[7];
-		endcase
-
-	end
-
-	always @ (*)
-	begin
-		debug_reg_dout = r[debug_reg_sel];
-	end
-*/
 
 	registers registers(
    	.clk (clk),
