@@ -56,25 +56,25 @@ module registers(
 		else 
 			r[3] <= r[3];
 
-//		if (run & we & (rd==3'b100)) 
-//    	  r[4] <= rd_din;
-//		else 
-//			r[4] <= r[4];
-//
-//		if (run & we & (rd==3'b101)) 
-//    	  r[5] <= rd_din;
-//		else 
-//			r[5] <= r[5];
-//
-//		if (run & we & (rd==3'b110)) 
-//    	  r[6] <= rd_din;
-//		else 
-//			r[6] <= r[6];
-//
-//		if (run & we & (rd==3'b111)) 
-//    	  r[7] <= rd_din;
-//		else 
-//			r[7] <= r[7];
+		if (run & we & (rd==3'b100)) 
+    	  r[4] <= rd_din;
+		else 
+			r[4] <= r[4];
+
+		if (run & we & (rd==3'b101)) 
+    	  r[5] <= rd_din;
+		else 
+			r[5] <= r[5];
+
+		if (run & we & (rd==3'b110)) 
+    	  r[6] <= rd_din;
+		else 
+			r[6] <= r[6];
+
+		if (run & we & (rd==3'b111)) 
+    	  r[7] <= rd_din;
+		else 
+			r[7] <= r[7];
 
 	end
 
@@ -91,7 +91,6 @@ module registers(
 			2'b11: rs2_dout = r[3];
 		endcase
 
-
 		case (rs1)
 			3'b000: rs1_dout = 'd0;
 			3'b001: rs1_dout = r[1];
@@ -102,15 +101,6 @@ module registers(
 			3'b110: rs1_dout = r[6];
 			3'b111: rs1_dout = r[7];
 		endcase
-
-/*
-		case (rs1[1:0])
-			2'b00: rs1_dout = 'd0;
-			2'b01: rs1_dout = r[1];
-			2'b10: rs1_dout = r[2];
-			2'b11: rs1_dout = r[3];
-		endcase
-*/
 
 	end
 
