@@ -98,10 +98,13 @@ module browndeer_rv8u(
 	reg [NREG-1:0] ldr_hzd;
 
 	/// reg control
-	reg [RBITS-1:0] rd;
-	reg [RBITS-1:0] rs1;
-	reg [RBITS-1:0] rs2;
-	reg [RBITS-1:0] rs3;
+//	reg [RBITS-1:0] rd;
+//	reg [RBITS-1:0] rs1;
+//	reg [RBITS-1:0] rs2;
+//	reg [RBITS-1:0] rs3;
+	wire [RBITS-1:0] rd;
+	wire [RBITS-1:0] rs1;
+	wire [RBITS-1:0] rs2;
 	wire reg_we;
 	wire reg_we_arb;
 	reg [BITS-1:0] rd_din;
@@ -197,7 +200,7 @@ module browndeer_rv8u(
 	//////////////////////////////////////////////
 
 	wire rv_itype, rv_stype, rv_btype;
-	reg rv_op, rv_op_imm;
+	wire rv_op, rv_op_imm;
 
 	///////////////////////////////////////
 	////////// IALU Declarations //////////
