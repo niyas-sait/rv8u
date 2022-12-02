@@ -145,7 +145,7 @@ module browndeer_rv8u(
 	reg ri_3;
 
 	/// bits alias probably not necessary
-	reg [2:0] funct3;
+	wire [2:0] funct3;
 
 	///////////////////////////////////////////////////////
 	////////// Declarations PIPELINE_STAGE_0_ILR //////////
