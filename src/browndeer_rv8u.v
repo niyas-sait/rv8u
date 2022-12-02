@@ -43,7 +43,8 @@
 module browndeer_rv8u(
 
 //	input in_clk,
-	input [7:0] io_in,
+//	input [7:1] io_in,
+	input [7:0] io_in, // ZZZ
 	output [7:0] io_out
 
 //	output [BITS-3:0] debug_pc,
@@ -54,6 +55,8 @@ module browndeer_rv8u(
 //	output reg [BITS-1:0] debug_reg_dout
 	
 );
+
+	wire in_clk; // ZZZ
 
 	///////////////////////////////////////////////////////////////////////////
 
@@ -71,8 +74,6 @@ module browndeer_rv8u(
 	//////////////////////////////////
 	////////// Declarations //////////
 	//////////////////////////////////
-
-	wire in_clk;
 
 	/// pipeline control
 	wire inval;
@@ -169,7 +170,8 @@ module browndeer_rv8u(
 
 	wire en2;
 
-	reg [2:0] imm210;
+//	reg [2:0] imm210;
+	reg [3:0] imm3210;
 
 	reg valid2;
 
@@ -261,10 +263,13 @@ module browndeer_rv8u(
    	.des_clk_out (des_clk_out)
 	);
 
-   assign io_out = des_sout;
-   assign des_sin = io_in[7:2];
-   assign in_clk = io_in[0];
+   assign in_clk = io_in[0]; // ZZZ
    assign rst = io_in[1];
+   assign des_sin = io_in[7:2];
+
+   assign io_out = des_sout;
+
+
    assign clk = des_clk_out;
 
    assign imem_dout[15:0] = des_dout[15:0];
@@ -484,16 +489,15 @@ module browndeer_rv8u(
 	always @ (*)
 	begin
 		if (rv_itype)
-			imm210 = instr_2[14:12];
+			imm3210 = { instr_2[15:12] };
 		else
-			imm210 = instr_2[5:3];
+			imm3210 = { instr_2[14], instr_2[5:3] };
 	end
 	
 	always @ (*)
 	begin
 		if (rv_itype|rv_btype|rv_stype)
-			imm = { instr_2[15], instr_2[15], instr_2[15], instr_2[15], 
-				instr_2[15], imm210 };
+			imm = { instr_2[15], instr_2[15], instr_2[15], instr_2[15], imm3210 };
 		else
 			imm = instr_2[13:6];
 	end
@@ -603,7 +607,8 @@ module browndeer_rv8u(
 	always @ (*)
 	begin
 		if (ins_lui)
-			rd_din = { imm[1:0], 6'd0 };
+//			rd_din = { imm[1:0], 6'd0 };
+			rd_din = { imm[4:0], 3'd0 };
 		else if (ins_jal|ins_jalr) 
 			rd_din = { 2'b00, pc_2 };
 		else
@@ -628,7 +633,8 @@ module browndeer_rv8u(
 	always @ (*)
 	begin
 		if (ins_jalr)
-			jump_addr = op_result[BITS-1:2];
+//			jump_addr = op_result[BITS-1:2];
+			jump_addr = op_result[BITS-3:0];
 		else
 			jump_addr = pc_2 + { imm[BITS-3:0] };
 	end
