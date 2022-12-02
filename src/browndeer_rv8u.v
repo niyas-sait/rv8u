@@ -285,6 +285,7 @@ module browndeer_rv8u(
    assign des_din[23] = dmem_en;
    assign des_din[24] = halt;
 
+	assign des_din[31:25] = 7'd0;
 
 	///////////////////////////////////////////////////////////////////////////
 
