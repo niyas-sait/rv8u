@@ -34,9 +34,7 @@ module registers(
 
 	parameter BITS = 8;
 	parameter RBITS = 3;
-	parameter NREG = 8;
 
-//	reg [BITS-1:0] r[1:NREG-1];	
 	reg [BITS-1:0] r1;
 	reg [BITS-1:0] r2;
 	reg [BITS-1:0] r3;
@@ -47,42 +45,7 @@ module registers(
 
 	always @ (posedge clk)
 	begin
-/*
-		if (run & we & (rd==3'b001)) 
-    	  r[1] <= rd_din;
-		else 
-			r[1] <= r[1];
 
-		if (run & we & (rd==3'b010)) 
-    	  r[2] <= rd_din;
-		else 
-			r[2] <= r[2];
-
-		if (run & we & (rd==3'b011)) 
-    	  r[3] <= rd_din;
-		else 
-			r[3] <= r[3];
-
-		if (run & we & (rd==3'b100)) 
-    	  r[4] <= rd_din;
-		else 
-			r[4] <= r[4];
-
-		if (run & we & (rd==3'b101)) 
-    	  r[5] <= rd_din;
-		else 
-			r[5] <= r[5];
-
-		if (run & we & (rd==3'b110)) 
-    	  r[6] <= rd_din;
-		else 
-			r[6] <= r[6];
-
-		if (run & we & (rd==3'b111)) 
-    	  r[7] <= rd_din;
-		else 
-			r[7] <= r[7];
-*/
 		if (run & we & (rd==3'b001)) 
     	  r1 <= rd_din;
 		else 
@@ -124,14 +87,6 @@ module registers(
 
 	always @ (*)
 	begin
-/*
-		case (rs2[1:0])
-			2'b00: rs2_dout = 'd0;
-			2'b01: rs2_dout = r[1];
-			2'b10: rs2_dout = r[2];
-			2'b11: rs2_dout = r[3];
-		endcase
-*/
 		case (rs2[1:0])
 			2'b00: rs2_dout = 'd0;
 			2'b01: rs2_dout = r1;
@@ -139,18 +94,6 @@ module registers(
 			2'b11: rs2_dout = r3;
 		endcase
 
-/*
-		case (rs1)
-			3'b000: rs1_dout = 'd0;
-			3'b001: rs1_dout = r[1];
-			3'b010: rs1_dout = r[2];
-			3'b011: rs1_dout = r[3];
-			3'b100: rs1_dout = r[4];
-			3'b101: rs1_dout = r[5];
-			3'b110: rs1_dout = r[6];
-			3'b111: rs1_dout = r[7];
-		endcase
-*/
 		case (rs1)
 			3'b000: rs1_dout = 'd0;
 			3'b001: rs1_dout = r1;

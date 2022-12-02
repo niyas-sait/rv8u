@@ -98,10 +98,6 @@ module browndeer_rv8u(
 	reg [NREG-1:0] ldr_hzd;
 
 	/// reg control
-//	reg [RBITS-1:0] rd;
-//	reg [RBITS-1:0] rs1;
-//	reg [RBITS-1:0] rs2;
-//	reg [RBITS-1:0] rs3;
 	wire [RBITS-1:0] rd;
 	wire [RBITS-1:0] rs1;
 	wire [RBITS-1:0] rs2;
@@ -173,7 +169,6 @@ module browndeer_rv8u(
 
 	wire en2;
 
-//	reg [2:0] imm210;
 	reg [3:0] imm3210;
 
 	reg valid2;
@@ -224,15 +219,11 @@ module browndeer_rv8u(
    ////////// DES //////////
    /////////////////////////
 
-//   reg des_clk_out;
    wire des_clk_out;
    wire [5:0] des_sin;
-//   reg [7:0] des_sout;
    wire [7:0] des_sout;
    wire [31:0] des_din;
    wire [23:0] des_dout;
-//   reg [2:0] des_counter;
-//   reg des_clk_en;
 
    //////////////////////////
    ////////// core //////////
@@ -611,7 +602,6 @@ module browndeer_rv8u(
 	always @ (*)
 	begin
 		if (ins_lui)
-//			rd_din = { imm[1:0], 6'd0 };
 			rd_din = { imm[4:0], 3'd0 };
 		else if (ins_jal|ins_jalr) 
 			rd_din = { 2'b00, pc_2 };
@@ -637,7 +627,6 @@ module browndeer_rv8u(
 	always @ (*)
 	begin
 		if (ins_jalr)
-//			jump_addr = op_result[BITS-1:2];
 			jump_addr = op_result[BITS-3:0];
 		else
 			jump_addr = pc_2 + { imm[BITS-3:0] };
