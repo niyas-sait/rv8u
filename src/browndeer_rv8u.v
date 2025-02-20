@@ -41,19 +41,8 @@
 
 //module barentsburg_core(
 module browndeer_rv8u(
-
-//	input in_clk,
-//	input [7:1] io_in,
-	input [7:0] io_in, // ZZZ
-	output [7:0] io_out
-
-//	output [BITS-3:0] debug_pc,
-//	output [IBITS-1:0] debug_instr,
-//	output [3:0] debug_valid_out,
-//
-//	input [RBITS-1:0] debug_reg_sel,
-//	output reg [BITS-1:0] debug_reg_dout
-	
+	input [7:0] io_in,
+	output [7:0] io_out	
 );
 
 	wire in_clk; // ZZZ
